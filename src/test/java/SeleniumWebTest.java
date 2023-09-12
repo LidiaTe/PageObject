@@ -10,7 +10,7 @@ import pages.WebDriverFactory;
 
 import java.time.Duration;
 
-public class SeleniumWebTest extends WebDriverFactory {
+public class SeleniumWebTest {
     private WebDriver driver;
     //private Logger log = LogManager.getLogger( Test1.class );
 
@@ -31,7 +31,8 @@ public class SeleniumWebTest extends WebDriverFactory {
     @BeforeEach
     public void setUp() {
 
-         driver = new ChromeDriver();
+         driver = new WebDriverFactory().createWebDriver("chrome");
+
 
         //log.info( "Драйвер запущен" );
     }
@@ -48,7 +49,17 @@ public class SeleniumWebTest extends WebDriverFactory {
     @Test
     public void firstTest() {
 
-        /* Шаги теста:
+        /*
+
+        Создайте класс WebDriverFactory со статическим методом create();
+Метод create() принимает обязательный параметр webDriverName и необязтельный параметр options, а возвращает соответствующий имени вебдрайвер с заданными (если были) options
+Примеры использования
+WebDriver wd = WebDriverFactory.createNewDriver("chrome");
+или
+FirefoxOptions options = new FirefoxOptions();
+WebDriver wd = WebDriverFactory.createNewDriver("firefox", options);
+
+        Шаги теста:
 
 Открыть https://otus.ru
 Авторизоваться на сайте
@@ -87,7 +98,7 @@ public class SeleniumWebTest extends WebDriverFactory {
         //Открыть https://otus.ru в "чистом браузере"
         driver.quit();
         //driver = new ChromeDriver();
-        WebDriver driver = createWebDriver("chrome");
+        WebDriver driver = new WebDriverFactory().createWebDriver( "chrome");
         driver.get( "https://otus.ru" );
 
         //Авторизоваться на сайте
